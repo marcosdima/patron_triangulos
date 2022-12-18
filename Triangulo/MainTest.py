@@ -29,8 +29,9 @@ puntoInicial = Punto(400, 400)
 listaDePuntos = ArregloDePuntos()
 listaDePuntos.append(puntoInicial)
 
-# Flags
+# Seteo de flag y objetos
 flag = False
+recta = Recta()
 
 # Printeo la ventana y el triángulo.
 screen.fill(white)
@@ -48,8 +49,8 @@ while not flag:
     # Selecciono unos de los vertices del triángulo.
     puntoRandomTriangulo = triangulo.get(r.randint(0, triangulo.size() - 1))
 
-    # Creo un objeto Recta con los puntos seleccionados.
-    recta = Recta(puntoRandom, puntoRandomTriangulo)
+    # seteo 'recta' con los puntos seleccionados.
+    recta.setFunction(puntoRandom, puntoRandomTriangulo)
 
     # Calculo la posición del punto intermedio.
     x = ((puntoRandom.posX + puntoRandomTriangulo.posX) / 2)

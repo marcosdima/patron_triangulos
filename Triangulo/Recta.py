@@ -6,6 +6,10 @@ class Recta:
         self.m = None
         self.ordenadaAlOrigen = None
         self.setFunction(puntoA, puntoB)
+
+    def __init__(self):
+        self.m = None
+        self.ordenadaAlOrigen = None
         
     def setFunction(self, puntoA, puntoB):
         
