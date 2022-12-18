@@ -30,46 +30,36 @@ listaDePuntos = ArregloDePuntos()
 listaDePuntos.append(puntoInicial)
 
 # Flags
-flag = True
-dibujo = True
+flag = False
 
-while flag:
+# Printeo la ventana y el triángulo.
+screen.fill(white)
+pygame.draw.polygon(screen, black, triangulo.getArrregloDeCoordenadas(), width=5)
+
+while not flag:
 
     for event in pygame.event.get():
-        if event.type == pygame.QUIT: sys.exit()
+        if event.type == pygame.QUIT: flag = True
+        elif event.type == pygame.KEYDOWN:
+            if pygame.K_ESCAPE: flag = True
 
-    # Printeo la ventana y el triángulo.
-    screen.fill(white)
-    pygame.draw.polygon(screen, black, triangulo.getArrregloDeCoordenadas(), width=5)
+    # Selecciono un punto del array de puntos.
+    puntoRandom = listaDePuntos.get(r.randint(0, listaDePuntos.size() - 1))
+    # Selecciono unos de los vertices del triángulo.
+    puntoRandomTriangulo = triangulo.get(r.randint(0, triangulo.size() - 1))
 
-    while dibujo:
+    # Creo un objeto Recta con los puntos seleccionados.
+    recta = Recta(puntoRandom, puntoRandomTriangulo)
 
-        # Selecciono un punto del array de puntos.
-        puntoRandom = listaDePuntos.get(r.randint(0, listaDePuntos.size() - 1))
-        # Selecciono unos de los vertices del triángulo.
-        puntoRandomTriangulo = triangulo.get(r.randint(0, triangulo.size() - 1))
+    # Calculo la posición del punto intermedio.
+    x = ((puntoRandom.posX + puntoRandomTriangulo.posX) / 2)
+    y = recta.getOrdenada(x)
+    puntoIntermedio = Punto(x, y)
 
-        # Creo un objeto Recta con los puntos seleccionados.
-        recta = Recta(puntoRandom, puntoRandomTriangulo)
+    # Dibujo el punto.
+    pygame.draw.circle(screen, black, puntoIntermedio.getCoordenadas(), radio)
 
-        # Calculo la posición del punto intermedio.
-        x = ((puntoRandom.posX + puntoRandomTriangulo.posX) / 2)
-        y = recta.getOrdenada(x)
-        puntoIntermedio = Punto(x, y)
+    # Appendeo el punto a la lista de puntos.
+    listaDePuntos.append(puntoIntermedio)
 
-        # Dibujo el punto.
-        pygame.draw.circle(screen, black, puntoIntermedio.getCoordenadas(), radio)
-
-        # Appendeo el punto a la lista de puntos.
-        listaDePuntos.append(puntoIntermedio)
-
-        pygame.display.flip()
-
-
-
-    
-
-
-
-    
-    
+    pygame.display.flip()
