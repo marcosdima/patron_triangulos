@@ -44,23 +44,24 @@ while flag:
 
     while dibujo:
 
-        # Seleciono un punto del array de puntos.
+        # Selecciono un punto del array de puntos.
         puntoRandom = listaDePuntos.get(r.randint(0, listaDePuntos.size() - 1))
+        # Selecciono unos de los vertices del triángulo.
         puntoRandomTriangulo = triangulo.get(r.randint(0, triangulo.size() - 1))
 
+        # Creo un objeto Recta con los puntos seleccionados.
         recta = Recta(puntoRandom, puntoRandomTriangulo)
 
+        # Calculo la posición del punto intermedio.
         x = ((puntoRandom.posX + puntoRandomTriangulo.posX) / 2)
         y = recta.getOrdenada(x)
-
         puntoIntermedio = Punto(x, y)
 
-        for i in listaDePuntos.arregloDePuntos:
-            pygame.draw.circle(screen, black, i.getCoordenadas(), radio)
+        # Dibujo el punto.
+        pygame.draw.circle(screen, black, puntoIntermedio.getCoordenadas(), radio)
 
+        # Appendeo el punto a la lista de puntos.
         listaDePuntos.append(puntoIntermedio)
-
-        #time.sleep(0.2)
 
         pygame.display.flip()
 
